@@ -1,0 +1,77 @@
+//背景图片
+@mixin bg($width:0, $height:0, $img:'', $zIndex:auto) {
+  width: $width;
+  height: $height;
+  background: url($img) no-repeat;
+  background-size: 100% auto;
+  z-index: $zIndex;
+}
+// 背景图居中扩展得足够大 使背景图覆盖北京区域；
+@mixin bg-cover-center($width:0, $height:0, $img:'', $zIndex:auto) {
+  @include bg($width, $height, $img, $zIndex);
+  background-position: center;
+  background-size: cover;
+}
+// 将背景图像等比缩放到宽度或高度与容器的宽度或高度相等，背景图像始终被包含在容器内
+@mixin bg-contain-center($width:0, $height:0, $img:'', $zIndex:auto) {
+  @include bg($width, $height, $img, $zIndex);
+  background-position: center;
+  background-size: contain;
+}
+// 绝对对位背景图
+@mixin bg-absolute($position:absolute, $top:0, $left:0, $width:0, $height:0, $img:'', $zIndex:auto) {
+  @include bg($width, $height, $img, $zIndex);
+  position: $position;
+  left: $left;
+  top: $top;
+}
+// 绝对定位背景图居中
+@mixin bg-absolute-center($position:absolute, $top:0, $left:0, $width:0, $height:0, $img:'', $zIndex:auto) {
+  @include bg($width, $height, $img, $zIndex);
+  position: $position;
+  left: 50%;
+  top: $top;
+  margin-left: -$width/2;
+}
+//inline-block 默认居中
+@mixin inline-block($vertical:middle) {
+  display: inline-block;
+  vertical-align: $vertical;
+}
+// 超出省略号  多行省略号 适用webkit浏览器或者移动端（大部分为webkit浏览器）
+@mixin ellipsis($lines: 1) {
+    @if $lines != 1 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: $lines;
+        -webkit-box-orient: vertical;
+    }@else {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+// 多行省略号 跨兼容的写法
+@mixin mutiLine-ellipsis-all($line,$lineH,$padding) {
+  p {
+    position: relative;
+    line-height: $lineH;
+    height: $lineH * $line;
+    overflow: hidden;
+  }
+  p::after {
+    content: "...";
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: $padding;
+  }
+}
+// 禁用样式
+@mixin disabled($bgColor: #e6e6e6,$textColor:#ababab) {
+  background-color: $bgColor !important;
+  color: $textColor !important;
+  cursor: not-allowed !important;
+}
