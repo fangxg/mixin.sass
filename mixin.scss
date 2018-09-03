@@ -19,14 +19,14 @@
   background-size: contain;
 }
 // 绝对对位背景图
-@mixin bg-absolute($position:absolute, $top:0, $left:0, $width:0, $height:0, $img:'', $zIndex:auto) {
+@mixin bg-absolute($top:0, $left:0, $width:0, $height:0, $img:'', $position:absolute, $zIndex:auto) {
   @include bg($width, $height, $img, $zIndex);
   position: $position;
   left: $left;
   top: $top;
 }
 // 绝对定位背景图居中
-@mixin bg-absolute-center($position:absolute, $top:0, $left:0, $width:0, $height:0, $img:'', $zIndex:auto) {
+@mixin bg-absolute-center($top:0, $width:0, $height:0, $img:'', $position:absolute,$zIndex:auto) {
   @include bg($width, $height, $img, $zIndex);
   position: $position;
   left: 50%;
